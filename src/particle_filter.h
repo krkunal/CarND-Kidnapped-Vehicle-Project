@@ -12,6 +12,7 @@
 #include <string>
 #include <vector>
 #include "helper_functions.h"
+#include "map.h"
 
 struct Particle {
   int id;
@@ -58,13 +59,13 @@ class ParticleFilter {
                   double yaw_rate);
   
   /**
-   * dataAssociation Finds which observations correspond to which landmarks 
+   * dataAssociation Finds which lanmark corresponds to a given observation 
    *   (likely by using a nearest-neighbors data association).
-   * @param predicted Vector of predicted landmark observations
-   * @param observations Vector of landmark observations
+   * @param observation observed landmark observation in the map coordinates
+   * @param map_landmarks Vector of landmarks
    */
-  void dataAssociation(std::vector<LandmarkObs> predicted, 
-                       std::vector<LandmarkObs>& observations);
+  void dataAssociation(LandmarkObs &observation, 
+                                         const std::vector<Map::single_landmark_s> &map_landmarks);
   
   /**
    * updateWeights Updates the weights for each particle based on the likelihood
